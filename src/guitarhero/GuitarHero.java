@@ -5,9 +5,11 @@
  */
 package guitarhero;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 /**
  *
- * @author Adamek
+ * @author Adamecek
  */
 public class GuitarHero {
 
