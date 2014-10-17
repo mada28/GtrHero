@@ -10,5 +10,5 @@ package guitarhero.models;
  * @author Buddy-1cent
  */
 public enum Colours {
-    RED,YELLOW,BLUE,ORANGE,GREEN,PUPRLE
+    RED,YELLOW,BLUE,ORANGE,GREEN,PURPLE
 }
