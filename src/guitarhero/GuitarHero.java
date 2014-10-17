@@ -17,7 +17,8 @@ public class GuitarHero {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Hell");
-        System.out.println("What's up");
+        System.out.println("What's up kokot pes");
+        System.out.println("What's up chuj drak");
     }
     
 }
