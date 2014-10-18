@@ -10,9 +10,12 @@ package guitarhero.models;
  * @author Buddy-1cent
  */
 public class Dot{
-    final private Colours colour;
-    final private int time;
+    private Colours colour;
+    private int time;
     private int position;
+    
+    
+    public Dot(){}
     
     public Dot(Colours c,int t){
         this.colour = c;
@@ -23,13 +26,24 @@ public class Dot{
     public Colours getColour(){
         return this.colour;
     }
+    public int getColourPosition(){
+        switch(this.colour){
+            case RED:    return 100;
+            case YELLOW: return 150;
+            case BLUE:   return 200;
+            case ORANGE: return 250;
+            case GREEN:  return 300;
+            case PURPLE: return 350;
+            default: return 0;
+        }
+    }
     public int getTime(){
         return this.time;
     }
     public int getPosition(){
         return this.position;
     }
-    public void Move(){
+    public void move(){
         this.position++;
     }
 }
