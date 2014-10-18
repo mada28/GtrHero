@@ -5,19 +5,62 @@
  */
 package guitarhero.view;
 
+import guitarhero.models.Dot;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.List;
+import javax.imageio.ImageIO;
+
 /**
  *
  * @author Buddy-1cent
  */
+
 public class MainPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form MainPanel
      */
+    
+    Image backBuffer;
+    BufferedImage background;
+    BufferedImage dot;
+    List<Dot> dots;
+    
     public MainPanel() {
         initComponents();
+        backBuffer=new BufferedImage(800, 600, BufferedImage.SCALE_DEFAULT);
+        try {
+            background = ImageIO.read(getClass().getResource("/guitarhero/view/background.jpg"));
+            dot = ImageIO.read(getClass().getResource("/guitarhero/view/yellow.png"));
+        } catch (IOException ex) {
+           
+        }
     }
+    
+    public void paintComponent(Graphics graphic) {
+        super.paintComponent(graphic);
+        Graphics g = backBuffer.getGraphics();
+        g.drawImage(background, 0, 0, backBuffer.getWidth(null),backBuffer.getHeight(null),null);
+        if (dots!=null ) {
+            for(Dot d :dots) {
+                g.drawImage(dot,d.getColourPosition(), d.getPosition(), null);
+            }
+        }
 
+        Graphics2D graphic2d = (Graphics2D) graphic;
+        //graphic2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+        //        RenderingHints.VALUE_ANTIALIAS_ON);
+        graphic2d.drawImage(backBuffer, 0, 0,this.getWidth(),this.getHeight(), null);
+    }
+    
+    public void updateModel(List<Dot> data) {
+        this.dots=data;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,18 +73,18 @@ public class MainPanel extends javax.swing.JPanel {
         setAutoscrolls(true);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(800, 600));
-        setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(0, 0));
+        setPreferredSize(new java.awt.Dimension(599, 510));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGap(0, 599, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGap(0, 510, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
