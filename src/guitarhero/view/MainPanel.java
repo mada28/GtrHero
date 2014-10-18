@@ -33,6 +33,9 @@ public class MainPanel extends javax.swing.JPanel {
     
     public MainPanel() {
         initComponents();
+        
+
+        
         backBuffer=new BufferedImage(800, 600, BufferedImage.SCALE_DEFAULT);
         try {
             background = ImageIO.read(getClass().getResource("/guitarhero/view/background.jpg"));
