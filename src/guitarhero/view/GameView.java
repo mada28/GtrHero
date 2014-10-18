@@ -5,6 +5,8 @@
  */
 package guitarhero.view;
 
+import guitarhero.models.Song;
+
 /**
  *
  * @author Buddy-1cent
@@ -14,8 +16,12 @@ public class GameView extends javax.swing.JPanel {
     /**
      * Creates new form GameView
      */
-    public GameView() {
+    Song song;
+    
+    public GameView(String s) {
         initComponents();
+        song = new Song(s+".mp3",100,100,s+".txt");
+        
     }
 
     /**
