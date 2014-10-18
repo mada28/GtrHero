@@ -29,8 +29,9 @@ public class Song {
         this.tempo = 100;
         this.length = 1000;
         dots = new ArrayList<Dot>();
-        for(int i=0;i<10;i++)
-            this.dots.add(new Dot(randomEnum(Colours.class),(i+1)*1000));
+        this.dots.add(new Dot(Colours.BLUE,5000));
+    //    for(int i=0;i<10;i++)
+    //        this.dots.add(new Dot(randomEnum(Colours.class),(i+1)*1000));
 
     }
     public Song(String n,int t,int l,String d){
