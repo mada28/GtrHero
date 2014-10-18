@@ -5,6 +5,9 @@
  */
 package guitarhero;
 
+import guitarhero.control.Controller;
+import guitarhero.view.GuitarHeroView;
+
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -23,6 +26,14 @@ public class GuitarHero {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.out.println("Zacatek");
+        Controller controller = new Controller();
+        System.out.println("Po new Controller");
+        GuitarHeroView  view = new GuitarHeroView(controller);
+        System.out.println("Po new GuitarHeroView");
+        view.setVisible(true);
+        System.out.println("Po setVisible");
+        controller.start();
     /*  
         JFXPanel fxPanel = new JFXPanel();
         Media hit = new Media(new File("asdf.mp3").toURI().toString());
@@ -31,16 +42,16 @@ public class GuitarHero {
         System.out.println("Uz to hraje kemo!");
     */
     //S pouzitim dalsi knihovny jl 1.0.1.jar
-    try{
-        File song = new File("asdf.mp3");
-        FileInputStream a = new FileInputStream(song);
-        BufferedInputStream b = new BufferedInputStream(a);
         try{
-            Player p = new Player(b);
-           // p.play();
-            p.play(200);
-        }catch(JavaLayerException ex){};
-    }catch(IOException e){};  
+            File song = new File("asdf.mp3");
+            FileInputStream a = new FileInputStream(song);
+            BufferedInputStream b = new BufferedInputStream(a);
+            try{
+                Player p = new Player(b);
+               // p.play();
+                p.play(200);
+            }catch(JavaLayerException ex){};
+        }catch(IOException e){};
     }
     
 }
