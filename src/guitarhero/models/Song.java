@@ -5,9 +5,20 @@
  */
 package guitarhero.models;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiEvent;
+import javax.sound.midi.MidiMessage;
+import javax.sound.midi.MidiSystem;
+import javax.sound.midi.Sequence;
+import javax.sound.midi.ShortMessage;
+import javax.sound.midi.Track;
 
 /**
  *
@@ -18,8 +29,10 @@ public class Song {
     final private int tempo;
     final private int length;
     public List<Dot> dots;
-
+    public static final int NOTE_ON = 0x90;
+    public static final String[] NOTE_NAMES = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
     
+   
     public static <T extends Enum<?>> T randomEnum(Class<T> clazz){
         int x = new Random().nextInt(clazz.getEnumConstants().length);
         return clazz.getEnumConstants()[x];
@@ -29,20 +42,62 @@ public class Song {
         this.name = "TestSong";
         this.tempo = 100;
         this.length = 1000;
-        dots = new ArrayList<Dot>();
-            this.dots.add(new Dot(Colours.RED,10000));
-            this.dots.add(new Dot(Colours.YELLOW,3000));
-            this.dots.add(new Dot(Colours.BLUE,3500));
+        dots = new ArrayList<>();
+        //this.dots.add(new Dot(Colours.RED,10000));
+        int d=0;
     //    for(int i=0;i<10;i++)
     //        this.dots.add(new Dot(randomEnum(Colours.class),(i+1)*1000));
+            Sequence sequence;
+        try {
+            sequence = MidiSystem.getSequence(new File("test1.mid"));
+        
+        
+        for (Track track :  sequence.getTracks()) {
+            if(track.size() < 10){
+                sequence.deleteTrack(track);
+                continue;
+            }
+            
+            
+            for (int i=0; i < track.size(); i++) { 
+                MidiEvent event = track.get(i);
+                
+                MidiMessage message = event.getMessage();
+                if (message instanceof ShortMessage) {
+                    ShortMessage sm = (ShortMessage) message;
+                    
+                    if (sm.getCommand() == NOTE_ON) {
+                        //System.out.print("@" + event.getTick() + " ");
+                        int key = sm.getData1();
+                        int octave = (key / 12)-1;
+                        int note = key % 12;
+                       
+                        if(key < 45)        this.dots.add(new Dot(Colours.RED,event.getTick())); 
+                        else if(key < 50)   this.dots.add(new Dot(Colours.YELLOW,1000));
+                        else if(key < 55)   this.dots.add(new Dot(Colours.BLUE,event.getTick()));
+                        else if(key < 60)   this.dots.add(new Dot(Colours.ORANGE,event.getTick()));
+                        else if(key < 65)   this.dots.add(new Dot(Colours.GREEN,event.getTick()));
+                        else                this.dots.add(new Dot(Colours.PURPLE,event.getTick()));
+                              
+                        String noteName = NOTE_NAMES[note];
+                        System.out.println( dots.get(d).getTime()+" "+ dots.get(d).getPosition() );
+                        d++;  
+                        System.out.println( event.getTick()+ " " + noteName + octave );
+                    } 
+                } 
+                
+            }
 
+        }
+        } catch (InvalidMidiDataException | IOException ex) {
+            Logger.getLogger(Song.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     public Song(String n,int t,int l,String d){
         this.name = n;
         this.tempo = t;
         this.length = l;
-        //nacist tecky ze souboru d
-        this.dots = null;
+        
     }
     public String getName(){
         return this.name;
