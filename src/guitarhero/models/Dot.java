@@ -27,14 +27,13 @@ public class Dot{
         return this.colour;
     }
     public int getColourPosition(){
-        int x = 34;
         switch(this.colour){
-            case RED:    return 125-x;
-            case YELLOW: return 158-x;
-            case BLUE:   return 191-x;
-            case ORANGE: return 222-x;
-            case GREEN:  return 257-x;
-            case PURPLE: return 290-x;
+            case RED:    return 91;
+            case YELLOW: return 124;
+            case BLUE:   return 157;
+            case ORANGE: return 188;
+            case GREEN:  return 223;
+            case PURPLE: return 256;
             default: return 0;
         }
     }
