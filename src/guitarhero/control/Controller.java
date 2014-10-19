@@ -50,7 +50,7 @@ public class Controller {
                 while (running) {
                     for(Dot dot: song.getDots()){ //zkouska: prochazeni vsech tecek (je tam jedna) a pokud tecka dosahne 400 zastavi stopky
                         
-                        if(stopWatch.getElapsedTime() >= dot.getTime() - 2000 && stopWatch.getElapsedTime() < dot.getTime() - 1950 ){
+                        if(stopWatch.getElapsedTime() >= dot.getTime() - 2000 && stopWatch.getElapsedTime() < dot.getTime() - 1920 ){
                             playingDots.add(dot);
                             System.out.println("hejhej");
                         }

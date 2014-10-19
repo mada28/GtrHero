@@ -20,7 +20,7 @@ public class Dot{
     public Dot(Colours c,long t){
         this.colour = c;
         this.time = t;
-        this.position = -1;
+        this.position = -34;
     }
     
     public Colours getColour(){
