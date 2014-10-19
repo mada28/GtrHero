@@ -40,9 +40,7 @@ public class MainPanel extends javax.swing.JPanel {
         try {
             background = ImageIO.read(getClass().getResource("/guitarhero/view/background.jpg"));
             dot = ImageIO.read(getClass().getResource("/guitarhero/view/yellow.png"));
-        } catch (IOException ex) {
-           
-        }
+        } catch (IOException ex) { System.out.println("Image File Error"); }
     }
     
     @Override

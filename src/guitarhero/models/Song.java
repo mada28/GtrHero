@@ -99,7 +99,7 @@ public class Song {
         }
         } catch (InvalidMidiDataException | IOException ex) {
             Logger.getLogger(Song.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Neni souhor");
+            System.out.println("Midi File Error");
         } 
     }
 
@@ -148,7 +148,7 @@ public class Song {
         }
         } catch (InvalidMidiDataException | IOException ex) {
             Logger.getLogger(Song.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Neni souhor");
+            System.out.println("Midi File Error");
         }
     }
     

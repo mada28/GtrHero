@@ -26,13 +26,13 @@ public class GuitarHero {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.println("Zacatek");
+        //System.out.println("Zacatek");
         Controller controller = new Controller();
-        System.out.println("Po new Controller");
+        //System.out.println("Po new Controller");
         GuitarHeroView  view = new GuitarHeroView(controller);
-        System.out.println("Po new GuitarHeroView");
+        //System.out.println("Po new GuitarHeroView");
         view.setVisible(true);
-        System.out.println("Po setVisible");
+        //System.out.println("Po setVisible");
         controller.start();
     /*  
         JFXPanel fxPanel = new JFXPanel();
@@ -42,7 +42,6 @@ public class GuitarHero {
         System.out.println("Uz to hraje kemo!");
     */
     //S pouzitim dalsi knihovny jl 1.0.1.jar
-        System.out.println("adffggergs");
         try{
             File song = new File("asdf.mp3");
             FileInputStream a = new FileInputStream(song);
@@ -52,9 +51,8 @@ public class GuitarHero {
                 for(int i=0;i<100;i++)
                     p.play(10);
                 
-            }catch(JavaLayerException ex){System.out.println("player error");};
-        }catch(IOException e){System.out.println("neni soubor");};
-        System.out.println("nasdfasfdsafasfsafsas");
+            }catch(JavaLayerException ex){ System.out.println("Player error"); };
+        }catch(IOException e){ System.out.println("Audio File Error"); };
     }
     
 }

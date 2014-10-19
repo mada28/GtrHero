@@ -85,8 +85,7 @@ public class Controller {
 
                     try {
                         Thread.sleep(10);
-                    } catch (InterruptedException ex) {
-                   }
+                    } catch (InterruptedException ex){ System.out.println("Thread Sleep Error"); }
                 }
             }
         };
@@ -98,8 +97,7 @@ public class Controller {
         
         try {
             thread.join();
-        } catch (InterruptedException ex) {
-        }
+        } catch (InterruptedException ex) { System.out.println("Thread Join Error"); }
      //   objects.clear();
         view.repaint();
     } 
