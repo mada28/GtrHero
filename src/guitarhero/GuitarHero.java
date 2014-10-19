@@ -42,16 +42,19 @@ public class GuitarHero {
         System.out.println("Uz to hraje kemo!");
     */
     //S pouzitim dalsi knihovny jl 1.0.1.jar
+        System.out.println("adffggergs");
         try{
             File song = new File("asdf.mp3");
             FileInputStream a = new FileInputStream(song);
             BufferedInputStream b = new BufferedInputStream(a);
             try{
                 Player p = new Player(b);
-               // p.play();
-                p.play(200);
-            }catch(JavaLayerException ex){};
-        }catch(IOException e){};
+                for(int i=0;i<100;i++)
+                    p.play(10);
+                
+            }catch(JavaLayerException ex){System.out.println("player error");};
+        }catch(IOException e){System.out.println("neni soubor");};
+        System.out.println("nasdfasfdsafasfsafsas");
     }
     
 }
