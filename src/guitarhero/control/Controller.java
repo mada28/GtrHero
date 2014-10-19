@@ -19,17 +19,20 @@ public class Controller {
     private Song song;
     private GuitarHeroView view; 
     private List<Dot> playingDots;
+    private List<Dot> allDots;
     private StopWatch stopWatch;
     
     public void initializeGame(){
         //nacteni tecek v Song
         song = new Song();
+        allDots = song.getDots();
         System.out.println("new song");
     }
     
     public Controller(){
         playingDots = new ArrayList<>();
         stopWatch = new StopWatch();
+        allDots = new ArrayList<>();    
     }
 
     private Thread thread;
@@ -43,20 +46,20 @@ public class Controller {
         initializeGame();
         running = true;
         stopWatch.start();
-        view.updateModel(song.getDots());
+        
+        //view.updateModel(song.getDots());
         thread = new Thread() {
             @Override
             public void run() {
                 while (running) {
                     for(Dot dot: song.getDots()){ //zkouska: prochazeni vsech tecek (je tam jedna) a pokud tecka dosahne 400 zastavi stopky
                         
-                        if(stopWatch.getElapsedTime() >= dot.getTime() - 2000 && stopWatch.getElapsedTime() < dot.getTime() - 1920 ){
+                        if(stopWatch.getElapsedTime() >= dot.getTime()-2000 && stopWatch.getElapsedTime() < dot.getTime() - 1901 ){
                             playingDots.add(dot);
                             System.out.println("hejhej");
                         }
-                        if(stopWatch.getElapsedTime() > dot.getTime()){
+                        if(stopWatch.getElapsedTime() > dot.getTime()+1000){
                             playingDots.remove(dot);
-                            stopWatch.stop();
                         }
                     }
                     System.out.println("Cas stopek: "+stopWatch.getElapsedTime()); //Pomocny vypis stopek
@@ -64,11 +67,12 @@ public class Controller {
                         d.move();
                         System.out.println("Mam tecku");
                     }
+                    view.updateModel(playingDots);
                     System.out.println("hej");
                     view.repaint();
 
                     try {
-                        Thread.sleep(10);
+                        Thread.sleep(20);
                     } catch (InterruptedException ex) {
                    }
                 }
