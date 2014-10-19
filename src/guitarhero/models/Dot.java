@@ -13,7 +13,7 @@ public class Dot{
     private Colours colour;
     private long time;
     private int position;
-    
+    private boolean pushed;
     
     public Dot(){}
     
@@ -21,8 +21,8 @@ public class Dot{
         this.colour = c;
         this.time = t;
         this.position = -34;
-    }
-    
+        this.pushed = false;
+    } 
     public Colours getColour(){
         return this.colour;
     }
@@ -45,5 +45,11 @@ public class Dot{
     }
     public void move(){
         this.position++;
+    }
+    public boolean getPushed(){
+        return this.pushed;
+    }
+    public void push(){
+        this.pushed = true;
     }
 }
