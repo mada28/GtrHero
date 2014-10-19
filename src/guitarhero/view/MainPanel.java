@@ -36,7 +36,7 @@ public class MainPanel extends javax.swing.JPanel {
         
 
         
-        backBuffer=new BufferedImage(800, 600, BufferedImage.SCALE_DEFAULT);
+        backBuffer=new BufferedImage(600, 508, BufferedImage.SCALE_DEFAULT);
         try {
             background = ImageIO.read(getClass().getResource("/guitarhero/view/background.jpg"));
             dot = ImageIO.read(getClass().getResource("/guitarhero/view/yellow.png"));
@@ -45,6 +45,7 @@ public class MainPanel extends javax.swing.JPanel {
         }
     }
     
+    @Override
     public void paintComponent(Graphics graphic) {
         super.paintComponent(graphic);
         Graphics g = backBuffer.getGraphics();
