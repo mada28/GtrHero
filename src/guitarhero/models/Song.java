@@ -44,13 +44,70 @@ public class Song {
         this.length = 1000;
         dots = new ArrayList<>();
         //this.dots.add(new Dot(Colours.RED,10000));
-        int d=0;
-    //    for(int i=0;i<10;i++)
-    //        this.dots.add(new Dot(randomEnum(Colours.class),(i+1)*1000));
+ //       for(int i=0;i<10;i++)
+ //           this.dots.add(new Dot(randomEnum(Colours.class),new Random().nextInt(10000)));   
+        this.midiConvert();
+    }
+    public Song(String n,int t,int l,String d){
+        this.name = n;
+        this.tempo = t;
+        this.length = l;
+        this.midiConvert(d);
+    }
+    
+    final public void midiConvert(){
+        int d = 0;
             Sequence sequence;
         try {
             sequence = MidiSystem.getSequence(new File("test1.mid"));
         
+        for (Track track :  sequence.getTracks()) {
+            if(track.size() < 10){
+                sequence.deleteTrack(track);
+                continue;
+            }
+                        
+            for (int i=0; i < track.size(); i++) { 
+                MidiEvent event = track.get(i);
+                
+                MidiMessage message = event.getMessage();
+                if (message instanceof ShortMessage) {
+                    ShortMessage sm = (ShortMessage) message;
+                    
+                    if (sm.getCommand() == NOTE_ON) {
+                        //System.out.print("@" + event.getTick() + " ");
+                        int key = sm.getData1();
+                        int octave = (key / 12)-1;
+                        int note = key % 12;
+                       
+                        if(key < 45)        this.dots.add(new Dot(Colours.RED,event.getTick())); 
+                        else if(key < 50)   this.dots.add(new Dot(Colours.YELLOW,event.getTick()));
+                        else if(key < 55)   this.dots.add(new Dot(Colours.BLUE,event.getTick()));
+                        else if(key < 60)   this.dots.add(new Dot(Colours.ORANGE,event.getTick()));
+                        else if(key < 65)   this.dots.add(new Dot(Colours.GREEN,event.getTick()));
+                        else                this.dots.add(new Dot(Colours.PURPLE,event.getTick()));
+                              
+                        String noteName = NOTE_NAMES[note];
+                        System.out.println( dots.get(d).getTime()+" "+ dots.get(d).getPosition() );
+                        d++;  
+                        System.out.println( event.getTick()+ " " + noteName + octave );
+                    } 
+                } 
+                
+            }
+
+        }
+        } catch (InvalidMidiDataException | IOException ex) {
+            Logger.getLogger(Song.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Neni souhor");
+        } 
+    }
+
+    final public void midiConvert(String midiFile){
+        int d=0;
+        Sequence sequence;
+        try {
+            sequence = MidiSystem.getSequence(new File(midiFile));
         
         for (Track track :  sequence.getTracks()) {
             if(track.size() < 10){
@@ -73,7 +130,7 @@ public class Song {
                         int note = key % 12;
                        
                         if(key < 45)        this.dots.add(new Dot(Colours.RED,event.getTick())); 
-                        else if(key < 50)   this.dots.add(new Dot(Colours.YELLOW,1000));
+                        else if(key < 50)   this.dots.add(new Dot(Colours.YELLOW,event.getTick()));
                         else if(key < 55)   this.dots.add(new Dot(Colours.BLUE,event.getTick()));
                         else if(key < 60)   this.dots.add(new Dot(Colours.ORANGE,event.getTick()));
                         else if(key < 65)   this.dots.add(new Dot(Colours.GREEN,event.getTick()));
@@ -91,14 +148,10 @@ public class Song {
         }
         } catch (InvalidMidiDataException | IOException ex) {
             Logger.getLogger(Song.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Neni souhor");
         }
     }
-    public Song(String n,int t,int l,String d){
-        this.name = n;
-        this.tempo = t;
-        this.length = l;
-        
-    }
+    
     public String getName(){
         return this.name;
     }
