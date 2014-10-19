@@ -11,13 +11,13 @@ package guitarhero.models;
  */
 public class Dot{
     private Colours colour;
-    private int time;
+    private long time;
     private int position;
     
     
     public Dot(){}
     
-    public Dot(Colours c,int t){
+    public Dot(Colours c,long t){
         this.colour = c;
         this.time = t;
         this.position = -1;
@@ -27,18 +27,18 @@ public class Dot{
         return this.colour;
     }
     public int getColourPosition(){
-        int x = 40;
+        int x = 34;
         switch(this.colour){
-            case RED:    return 115-x;
-            case YELLOW: return 150-x;
-            case BLUE:   return 182-x;
-            case ORANGE: return 212-x;
-            case GREEN:  return 245-x;
-            case PURPLE: return 278-x;
+            case RED:    return 125-x;
+            case YELLOW: return 158-x;
+            case BLUE:   return 191-x;
+            case ORANGE: return 222-x;
+            case GREEN:  return 257-x;
+            case PURPLE: return 290-x;
             default: return 0;
         }
     }
-    public int getTime(){
+    public long getTime(){
         return this.time;
     }
     public int getPosition(){

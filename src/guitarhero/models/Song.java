@@ -8,6 +8,7 @@ package guitarhero.models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 /**
  *
  * @author Buddy-1cent
@@ -29,7 +30,9 @@ public class Song {
         this.tempo = 100;
         this.length = 1000;
         dots = new ArrayList<Dot>();
-        this.dots.add(new Dot(Colours.BLUE,5000));
+            this.dots.add(new Dot(Colours.RED,10000));
+            this.dots.add(new Dot(Colours.YELLOW,3000));
+            this.dots.add(new Dot(Colours.BLUE,3500));
     //    for(int i=0;i<10;i++)
     //        this.dots.add(new Dot(randomEnum(Colours.class),(i+1)*1000));
 
