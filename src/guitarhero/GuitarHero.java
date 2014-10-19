@@ -8,9 +8,9 @@ package guitarhero;
 import guitarhero.control.Controller;
 import guitarhero.view.GuitarHeroView;
 
-import javafx.embed.swing.JFXPanel;
+/*import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer;*/
 
 import java.io.*;
 import javazoom.jl.decoder.JavaLayerException;

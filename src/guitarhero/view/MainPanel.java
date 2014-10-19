@@ -29,6 +29,12 @@ public class MainPanel extends javax.swing.JPanel {
     Image backBuffer;
     BufferedImage background;
     BufferedImage dot;
+    BufferedImage dotr;
+    BufferedImage doty;
+    BufferedImage dotb;
+    BufferedImage doto;
+    BufferedImage dotg;
+    BufferedImage dotp;
     List<Dot> dots;
     
     public MainPanel() {
@@ -39,7 +45,12 @@ public class MainPanel extends javax.swing.JPanel {
         backBuffer=new BufferedImage(600, 508, BufferedImage.SCALE_DEFAULT);
         try {
             background = ImageIO.read(getClass().getResource("/guitarhero/view/background.jpg"));
-            dot = ImageIO.read(getClass().getResource("/guitarhero/view/yellow.png"));
+            dotr = ImageIO.read(getClass().getResource("/guitarhero/view/red.png"));
+            doty = ImageIO.read(getClass().getResource("/guitarhero/view/yellow.png"));
+            dotb = ImageIO.read(getClass().getResource("/guitarhero/view/blue.png"));
+            doto = ImageIO.read(getClass().getResource("/guitarhero/view/orange.png"));
+            dotg = ImageIO.read(getClass().getResource("/guitarhero/view/green.png"));
+            dotp = ImageIO.read(getClass().getResource("/guitarhero/view/purple.png"));
         } catch (IOException ex) { System.out.println("Image File Error"); }
     }
     
@@ -50,6 +61,22 @@ public class MainPanel extends javax.swing.JPanel {
         g.drawImage(background, 0, 0, backBuffer.getWidth(null),backBuffer.getHeight(null),null);
         if (dots!=null ) {
             for(Dot d :dots) {
+                switch(d.getColour()){
+                    case RED:    dot = dotr;
+                            break;
+                    case YELLOW: dot = doty;
+                            break;
+                    case BLUE:   dot = dotb;
+                            break;
+                    case ORANGE: dot = doto;
+                            break;
+                    case GREEN:  dot = dotg;
+                            break;
+                    case PURPLE: dot = dotp;
+                            break;
+                    default: System.out.println("je to v hajzlu");
+                            break;
+                }
                 g.drawImage(dot,d.getColourPosition(), d.getPosition(), null);
             }
         }
