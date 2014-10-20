@@ -7,15 +7,6 @@ package guitarhero;
 
 import guitarhero.control.Controller;
 import guitarhero.view.GuitarHeroView;
-
-/*import javafx.embed.swing.JFXPanel;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;*/
-
-import java.io.*;
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.*;
-
 /**
  *
  * @author Buddy-1cent
@@ -34,13 +25,5 @@ public class GuitarHero {
         view.setVisible(true);
         System.out.println("Po setVisible");
         controller.start();
-    /*  
-        JFXPanel fxPanel = new JFXPanel();
-        Media hit = new Media(new File("asdf.mp3").toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
-        mediaPlayer.play();
-        System.out.println("Uz to hraje kemo!");
-    */
-    //S pouzitim dalsi knihovny jl 1.0.1.jar
     }
 }
