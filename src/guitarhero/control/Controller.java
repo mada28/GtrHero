@@ -64,15 +64,15 @@ public class Controller {
             BufferedInputStream b = new BufferedInputStream(a);
             try{
                 p = new Player(b);
-                }catch(JavaLayerException ex){ System.out.println("Player error"); };
-            }catch(IOException e){ System.out.println("Audio File Error"); };
+                }catch(JavaLayerException ex){ System.out.println("Player error"); }
+            }catch(IOException e){ System.out.println("Audio File Error"); }
         
-        //view.updateModel(song.getDots());
+        stopWatch.start();
         threadDots = new Thread() {
             @Override
             public void run() {
                 while (running) {
-                    stopWatch.start();
+                    //stopWatch.start();
                     //System.out.println("counter "+counter);
                         for(int i = index;i<index+6;i++){
                             //System.out.println("Som zaseknuty kokot");
@@ -93,14 +93,13 @@ public class Controller {
                     }
                     counter += 10;
                     view.updateModel(playingDots);
-                    //System.out.println("hej");
                     view.repaint();
                     
+                    System.out.println("counter " + counter);
+                    System.out.println("stopky  " + stopWatch.getElapsedTime());
                     
                     k = view.getKeys();
-                    //System.out.println(counter+" ctralala");
-                    for(int i=0;i<k.length;i++){
-                        
+                    for(int i=0;i<k.length;i++){ 
                         if(k[i] == true){
                             boolean m = false;
                             for(Dot dot: playingDots){
@@ -127,8 +126,12 @@ public class Controller {
                             }
                         }
                     }
-                    while(stopWatch.getElapsedTime() < 3){}
-                    stopWatch.stop();
+                    System.out.println("haha");
+                    //while(stopWatch.getElapsedTime() < 10){}
+                    //stopWatch.stop();
+                    try {
+                        Thread.sleep(4);
+                    } catch (InterruptedException ex){ System.out.println("Thread Sleep Error"); }
                 }
             }
         };
@@ -140,7 +143,7 @@ public class Controller {
                 while (running) {
                     try{
                         p.play(1);
-                        }catch(JavaLayerException ex){ System.out.println("Player error"); };                     
+                        }catch(JavaLayerException ex){ System.out.println("Player error"); }                    
                     try {
                         Thread.sleep(1);
                     } catch (InterruptedException ex){ System.out.println("Thread Sleep Error"); }
@@ -150,7 +153,7 @@ public class Controller {
         try{
             threadPlayer.sleep(1300);
         }catch(InterruptedException ex){ System.out.println("Thread Sleep Error"); }
-        //threadPlayer.start();                
+        threadPlayer.start();                
 }
 
     public void stop() {
