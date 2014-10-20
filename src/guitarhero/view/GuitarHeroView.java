@@ -19,16 +19,20 @@ public class GuitarHeroView extends javax.swing.JFrame {
      * Creates new form GameView
      */
     Controller controller;
-    private int key=0;
+    private boolean[] keys;
     
     public GuitarHeroView(Controller controller) {
         initComponents();
+        keys = new boolean[6];
         this.controller=controller;
         controller.setView(this);
         this.requestFocus();
 
-    //    song = new Song(s+".mp3",100,100,s+".txt");
-        
+    //    song = new Song(s+".mp3",100,100,s+".txt");   
+    }
+    
+    public boolean[] getKeys(){
+        return this.keys;
     }
     
     public void updateModel(List<Dot> model) {
@@ -95,17 +99,22 @@ public class GuitarHeroView extends javax.swing.JFrame {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         switch (evt.getKeyCode()) {
             case KeyEvent.VK_X:
-                key = 1;
-                System.out.println("MACK");
+                keys[0] = true;
                 break;
             case KeyEvent.VK_C:
-                key = 2;
+                keys[1] = true;
                 break;
             case KeyEvent.VK_V:
-                key = 3;
+                keys[2] = true;
                 break;
             case KeyEvent.VK_B:
-                key = 4;
+                keys[3] = true;
+                break;
+            case KeyEvent.VK_N:
+                keys[4] = true;
+                break;
+            case KeyEvent.VK_M:
+                keys[5] = true;
                 break;
             default:
         }
@@ -114,16 +123,22 @@ public class GuitarHeroView extends javax.swing.JFrame {
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         switch (evt.getKeyCode()) {
             case KeyEvent.VK_X:
-                key = 0;
+                keys[0] = false;
                 break;
             case KeyEvent.VK_C:
-                key = 0;
+                keys[1] = false;
                 break;
             case KeyEvent.VK_V:
-                key = 0;
+                keys[2] = false;
                 break;
             case KeyEvent.VK_B:
-                key = 0;
+                keys[3] = false;
+                break;
+            case KeyEvent.VK_N:
+                keys[4] = false;
+                break;
+            case KeyEvent.VK_M:
+                keys[5] = false;
                 break;
             default:
         }
