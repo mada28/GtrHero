@@ -67,6 +67,16 @@ public class MainPanel extends javax.swing.JPanel {
         
         Dot a = new Dot(Colours.YELLOW,0,500);
         g.drawImage(dotrb,a.getColourPosition(), a.getPosition(), null);
+        a = new Dot(Colours.BLUE,0,500);
+        g.drawImage(dotrb,a.getColourPosition(), a.getPosition(), null);
+        a = new Dot(Colours.RED,0,500);
+        g.drawImage(dotrb,a.getColourPosition(), a.getPosition(), null);
+        a = new Dot(Colours.GREEN,0,500);
+        g.drawImage(dotrb,a.getColourPosition(), a.getPosition(), null);
+        a = new Dot(Colours.ORANGE,0,500);
+        g.drawImage(dotrb,a.getColourPosition(), a.getPosition(), null);
+        a = new Dot(Colours.PURPLE,0,500);
+        g.drawImage(dotrb,a.getColourPosition(), a.getPosition(), null);
         
         if (dots!=null ) {
             for(Dot d :dots) {
