@@ -7,6 +7,7 @@ package guitarhero.view;
 
 import guitarhero.control.Controller;
 import guitarhero.models.Dot;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ public class GuitarHeroView extends javax.swing.JFrame {
      * Creates new form GameView
      */
     Controller controller;
+    private int key=0;
     
     public GuitarHeroView(Controller controller) {
         initComponents();
@@ -45,6 +47,17 @@ public class GuitarHeroView extends javax.swing.JFrame {
         mainPanel1 = new guitarhero.view.MainPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
 
         mainPanel1.setMinimumSize(new java.awt.Dimension(600, 508));
 
@@ -78,6 +91,47 @@ public class GuitarHeroView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        switch (evt.getKeyCode()) {
+            case KeyEvent.VK_X:
+                key = 1;
+                System.out.println("MACK");
+                break;
+            case KeyEvent.VK_C:
+                key = 2;
+                break;
+            case KeyEvent.VK_V:
+                key = 3;
+                break;
+            case KeyEvent.VK_B:
+                key = 4;
+                break;
+            default:
+        }
+    }//GEN-LAST:event_formKeyPressed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        switch (evt.getKeyCode()) {
+            case KeyEvent.VK_X:
+                key = 0;
+                break;
+            case KeyEvent.VK_C:
+                key = 0;
+                break;
+            case KeyEvent.VK_V:
+                key = 0;
+                break;
+            case KeyEvent.VK_B:
+                key = 0;
+                break;
+            default:
+        }
+    }//GEN-LAST:event_formKeyReleased
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
