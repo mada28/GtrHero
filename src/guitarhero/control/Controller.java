@@ -60,56 +60,38 @@ public class Controller {
     public void start() {
         initializeGame();
         running = true;
-        stopWatch.start();
+        
+        try{
+            File song = new File("woman.mp3");
+            FileInputStream a = new FileInputStream(song);
+            BufferedInputStream b = new BufferedInputStream(a);
+            try{
+                p = new Player(b);
+                }catch(JavaLayerException ex){ System.out.println("Player error"); };
+            }catch(IOException e){ System.out.println("Audio File Error"); };
         
         //view.updateModel(song.getDots());
         threadDots = new Thread() {
             @Override
             public void run() {
                 while (running) {
-                    /*
-                    for(Dot dot: song.getDots()){ //zkouska: prochazeni vsech tecek (je tam jedna) a pokud tecka dosahne 400 zastavi stopky
-                       // System.out.println("ahoj");
-                       // System.out.println(dot.getTime()+" cas tecky");
-                       System.out.println("Cas stopek: "+stopWatch.getElapsedTime()); //Pomocny vypis stopek
-                       System.out.println("counter"+counter);
-                        if(counter == dot.getTime()){
-                            playingDots.add(dot);
-                         //   System.out.println("hejhej");
-                        }
-                        
-                        /*
-                        if(stopWatch.getElapsedTime()>=dot.getTime() -2000 && stopWatch.getElapsedTime()<dot.getTime()-1980  ){
-                            playingDots.add(dot);
-                            System.out.println("hejhej");
-                        }
-                        
-                        if(stopWatch.getElapsedTime() > dot.getTime()){
-                            playingDots.remove(dot);
-                            System.out.println("odstran");
-                        }
-                                */
-                   /* }*/
                     //System.out.println("counter "+counter);
-                        for(int i = index;i<4;i++){
+                        for(int i = index;i<index+6;i++){
                             //System.out.println("Som zaseknuty kokot");
                             if(counter == allDots.get(i).getTime()){
                                 playingDots.add(allDots.get(i));
                                 index++;
                                 //System.out.println("Pridavam tecku");
                             }
-                        }
-                    Dot d;        
+                        }       
                     for(int i=0;i<playingDots.size();i++){
                    // for(Dot d: playingDots){  
-                        d = playingDots.get(i);
-                        d.move();
+                        playingDots.get(i).move();
                         //System.out.println("Mam tecku");
-                        if(d.getPosition() >= 534){
-                            playingDots.remove(d);
+                        if(playingDots.get(i).getPosition() >= 534){
+                            playingDots.remove(playingDots.get(i));
                             //System.out.println("Odebiram tecku");
-                        }
-                        
+                        }  
                     }
                     counter += 10;
                     view.updateModel(playingDots);
@@ -144,37 +126,40 @@ public class Controller {
                                 }
                             }
                         }
-                    }                        
+                    }
                     
+                    stopWatch.start();
+                    try{
+                        p.play(1);
+                        }catch(JavaLayerException ex){ System.out.println("Player error"); };
+                    System.out.println("Cas threadu: "+stopWatch.getElapsedTime());                      
+                    stopWatch.stop();
+                
                     
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException ex){ System.out.println("Thread Sleep Error"); }
+                    /*try{
+                        Thread.sleep(1);
+                    } catch (InterruptedException ex){ System.out.println("Thread Sleep Error"); }*/
                 }
             }
         };
         threadDots.start();
         
-        try{
-            File song = new File("woman.mp3");
-            FileInputStream a = new FileInputStream(song);
-            BufferedInputStream b = new BufferedInputStream(a);
-            try{
-                p = new Player(b);
-                }catch(JavaLayerException ex){ System.out.println("Player error"); };
-            }catch(IOException e){ System.out.println("Audio File Error"); };
-            
+        
+        /*    
         threadPlayer = new Thread() {
             @Override
             public void run() {
                 while (running) {
+                    stopWatch.start();
                     try{
                         p.play(1);
                         }catch(JavaLayerException ex){ System.out.println("Player error"); };
-                                          
+                    System.out.println("Cas threadu: "+stopWatch.getElapsedTime());                      
                     try {
                         Thread.sleep(1);
                     } catch (InterruptedException ex){ System.out.println("Thread Sleep Error"); }
+                    System.out.println("Cas threadu: "+stopWatch.getElapsedTime());
+                    stopWatch.stop();
                 }
             }
         };
@@ -182,6 +167,8 @@ public class Controller {
             threadPlayer.sleep(1300);
         }catch(InterruptedException ex){ System.out.println("Thread Sleep Error"); }
         threadPlayer.start();
+                */
+                
 }
 
     public void stop() {
