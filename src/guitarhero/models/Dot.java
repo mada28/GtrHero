@@ -31,7 +31,7 @@ public class Dot{
             case RED:    return 91;
             case YELLOW: return 124;
             case BLUE:   return 157;
-            case ORANGE: return 188;
+            case ORANGE: return 190;
             case GREEN:  return 223;
             case PURPLE: return 256;
             default: return 0;
