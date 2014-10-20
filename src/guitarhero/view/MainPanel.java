@@ -93,7 +93,7 @@ public class MainPanel extends javax.swing.JPanel {
                             break;
                     case PURPLE: dot = dotp;
                             break;
-                    default: System.out.println("je to v hajzlu");
+                    default: System.out.println("Colour Error");
                             break;
                 }
                 g.drawImage(dot,d.getColourPosition(), d.getPosition(), null);
