@@ -44,8 +44,8 @@ public class Song {
         this.length = 1000;
         dots = new ArrayList<>();
         //this.dots.add(new Dot(Colours.RED,10000));
- //       for(int i=0;i<10;i++)
- //           this.dots.add(new Dot(randomEnum(Colours.class),new Random().nextInt(10000)));   
+        //for(int i=0;i<1000;i++)
+        //    this.dots.add(new Dot(randomEnum(Colours.class),(new Random().nextInt(1000))*10,0));   
         this.midiConvert();
     }
     public Song(String n,int t,int l,String d){
@@ -55,7 +55,7 @@ public class Song {
         this.midiConvert(d);
     }
     
-    final public void midiConvert(){
+    final private void midiConvert(){
         int d = 0;
             Sequence sequence;
         try {
@@ -79,23 +79,23 @@ public class Song {
                         int key = sm.getData1();
                         int octave = (key / 12)-1;
                         int note = key % 12;
+                        
+                        long tick = (event.getTick()/10)*10;
                        
-                        if(key < 45)        this.dots.add(new Dot(Colours.RED,event.getTick(),0)); 
-                        else if(key < 50)   this.dots.add(new Dot(Colours.YELLOW,event.getTick(),0));
-                        else if(key < 55)   this.dots.add(new Dot(Colours.BLUE,event.getTick(),0));
-                        else if(key < 60)   this.dots.add(new Dot(Colours.ORANGE,event.getTick(),0));
-                        else if(key < 65)   this.dots.add(new Dot(Colours.GREEN,event.getTick(),0));
-                        else                this.dots.add(new Dot(Colours.PURPLE,event.getTick(),0));
+                        if(key < 45)        this.dots.add(new Dot(Colours.RED,tick,0)); 
+                        else if(key < 50)   this.dots.add(new Dot(Colours.YELLOW,tick,0));
+                        else if(key < 55)   this.dots.add(new Dot(Colours.BLUE,tick,0));
+                        else if(key < 60)   this.dots.add(new Dot(Colours.ORANGE,tick,0));
+                        else if(key < 65)   this.dots.add(new Dot(Colours.GREEN,tick,0));
+                        else                this.dots.add(new Dot(Colours.PURPLE,tick,0));
                               
                         String noteName = NOTE_NAMES[note];
                         System.out.println( dots.get(d).getTime()+" "+ dots.get(d).getPosition() );
                         d++;  
-                        System.out.println( event.getTick()+ " " + noteName + octave );
-                    } 
+                        //System.out.println( event.getTick()+ " " + noteName + octave );
+                    }
                 } 
-                
             }
-
         }
         } catch (InvalidMidiDataException | IOException ex) {
             Logger.getLogger(Song.class.getName()).log(Level.SEVERE, null, ex);
@@ -103,7 +103,7 @@ public class Song {
         } 
     }
 
-    final public void midiConvert(String midiFile){
+    final private void midiConvert(String midiFile){
         int d=0;
         Sequence sequence;
         try {
