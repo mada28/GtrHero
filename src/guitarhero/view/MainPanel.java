@@ -6,6 +6,7 @@
 package guitarhero.view;
 
 import guitarhero.models.Dot;
+import guitarhero.models.Colours;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -35,6 +36,8 @@ public class MainPanel extends javax.swing.JPanel {
     BufferedImage doto;
     BufferedImage dotg;
     BufferedImage dotp;
+    BufferedImage dotrb;
+    BufferedImage dotrg;
     List<Dot> dots;
     
     public MainPanel() {
@@ -51,6 +54,8 @@ public class MainPanel extends javax.swing.JPanel {
             doto = ImageIO.read(getClass().getResource("/guitarhero/view/orange.png"));
             dotg = ImageIO.read(getClass().getResource("/guitarhero/view/green.png"));
             dotp = ImageIO.read(getClass().getResource("/guitarhero/view/purple.png"));
+            dotrb = ImageIO.read(getClass().getResource("/guitarhero/view/pink_black.png"));
+            dotrg = ImageIO.read(getClass().getResource("/guitarhero/view/pink_grey.png"));
         } catch (IOException ex) { System.out.println("Image File Error"); }
     }
     
@@ -59,6 +64,10 @@ public class MainPanel extends javax.swing.JPanel {
         super.paintComponent(graphic);
         Graphics g = backBuffer.getGraphics();
         g.drawImage(background, 0, 0, backBuffer.getWidth(null),backBuffer.getHeight(null),null);
+        
+        Dot a = new Dot(Colours.YELLOW,0,500);
+        g.drawImage(dotrb,a.getColourPosition(), a.getPosition(), null);
+        
         if (dots!=null ) {
             for(Dot d :dots) {
                 switch(d.getColour()){

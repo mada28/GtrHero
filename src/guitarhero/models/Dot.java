@@ -17,12 +17,12 @@ public class Dot{
     
     public Dot(){}
     
-    public Dot(Colours c,long t){
+    public Dot(Colours c,long t,int p){
         this.colour = c;
         this.time = t;
-        this.position = -34;
+        this.position = p-34;
         this.pushed = false;
-    } 
+    }  
     public Colours getColour(){
         return this.colour;
     }

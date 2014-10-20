@@ -80,12 +80,12 @@ public class Song {
                         int octave = (key / 12)-1;
                         int note = key % 12;
                        
-                        if(key < 45)        this.dots.add(new Dot(Colours.RED,event.getTick())); 
-                        else if(key < 50)   this.dots.add(new Dot(Colours.YELLOW,event.getTick()));
-                        else if(key < 55)   this.dots.add(new Dot(Colours.BLUE,event.getTick()));
-                        else if(key < 60)   this.dots.add(new Dot(Colours.ORANGE,event.getTick()));
-                        else if(key < 65)   this.dots.add(new Dot(Colours.GREEN,event.getTick()));
-                        else                this.dots.add(new Dot(Colours.PURPLE,event.getTick()));
+                        if(key < 45)        this.dots.add(new Dot(Colours.RED,event.getTick(),0)); 
+                        else if(key < 50)   this.dots.add(new Dot(Colours.YELLOW,event.getTick(),0));
+                        else if(key < 55)   this.dots.add(new Dot(Colours.BLUE,event.getTick(),0));
+                        else if(key < 60)   this.dots.add(new Dot(Colours.ORANGE,event.getTick(),0));
+                        else if(key < 65)   this.dots.add(new Dot(Colours.GREEN,event.getTick(),0));
+                        else                this.dots.add(new Dot(Colours.PURPLE,event.getTick(),0));
                               
                         String noteName = NOTE_NAMES[note];
                         System.out.println( dots.get(d).getTime()+" "+ dots.get(d).getPosition() );
@@ -129,12 +129,12 @@ public class Song {
                         int octave = (key / 12)-1;
                         int note = key % 12;
                        
-                        if(key < 45)        this.dots.add(new Dot(Colours.RED,event.getTick())); 
-                        else if(key < 50)   this.dots.add(new Dot(Colours.YELLOW,event.getTick()));
-                        else if(key < 55)   this.dots.add(new Dot(Colours.BLUE,event.getTick()));
-                        else if(key < 60)   this.dots.add(new Dot(Colours.ORANGE,event.getTick()));
-                        else if(key < 65)   this.dots.add(new Dot(Colours.GREEN,event.getTick()));
-                        else                this.dots.add(new Dot(Colours.PURPLE,event.getTick()));
+                        if(key < 45)        this.dots.add(new Dot(Colours.RED,event.getTick(),0)); 
+                        else if(key < 50)   this.dots.add(new Dot(Colours.YELLOW,event.getTick(),0));
+                        else if(key < 55)   this.dots.add(new Dot(Colours.BLUE,event.getTick(),0));
+                        else if(key < 60)   this.dots.add(new Dot(Colours.ORANGE,event.getTick(),0));
+                        else if(key < 65)   this.dots.add(new Dot(Colours.GREEN,event.getTick(),0));
+                        else                this.dots.add(new Dot(Colours.PURPLE,event.getTick(),0));
                               
                         String noteName = NOTE_NAMES[note];
                         System.out.println( dots.get(d).getTime()+" "+ dots.get(d).getPosition() );
