@@ -13,7 +13,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 
@@ -51,8 +50,6 @@ public class Controller {
         allDots = new ArrayList<>();    
     }
 
-    
-
     public void setView(GuitarHeroView view) {
         this.view = view;
     }
@@ -75,6 +72,7 @@ public class Controller {
             @Override
             public void run() {
                 while (running) {
+                    stopWatch.start();
                     //System.out.println("counter "+counter);
                         for(int i = index;i<index+6;i++){
                             //System.out.println("Som zaseknuty kokot");
@@ -104,19 +102,19 @@ public class Controller {
                         if(k[i] == true){
                             boolean m = false;
                             for(Dot dot: playingDots){
-                                
                                 if(dot.getPosition()>=480 && dot.getPosition()<=520 && dot.getPushed()==0 && dot.getColour().ordinal()==i){
                                     dot.push();
                                     m=true; 
+                                    System.out.println("Zmacknut spravny knoflik");
                                     break;
                                 }
                                 else if(dot.getPosition()>=480 && dot.getPosition()<=520 && dot.getPushed()>0 && dot.getColour().ordinal()==i){
                                     m=false;
                                     System.out.println("Zmacknuto podruhe");
-                                } 
+                                }
                             }
-                            if(m) System.out.println("Zmacknut spravny knoflik");
-                            else System.out.println("Chyba");
+                            if(!m) System.out.println("Chyba");
+                            
                         }    
                         if(k[i] == false){
                             for(Dot dot: playingDots){
@@ -128,47 +126,31 @@ public class Controller {
                         }
                     }
                     
-                    stopWatch.start();
                     try{
-                        p.play(1);
-                        }catch(JavaLayerException ex){ System.out.println("Player error"); };
-                    System.out.println("Cas threadu: "+stopWatch.getElapsedTime());                      
-                    stopWatch.stop();
-                
-                    
-                    /*try{
-                        Thread.sleep(1);
-                    } catch (InterruptedException ex){ System.out.println("Thread Sleep Error"); }*/
+                        Thread.sleep(4);
+                    } catch (InterruptedException ex){ System.out.println("Thread Sleep Error"); }
                 }
             }
         };
         threadDots.start();
-        
-        
-        /*    
+         
         threadPlayer = new Thread() {
             @Override
             public void run() {
                 while (running) {
-                    stopWatch.start();
                     try{
                         p.play(1);
-                        }catch(JavaLayerException ex){ System.out.println("Player error"); };
-                    System.out.println("Cas threadu: "+stopWatch.getElapsedTime());                      
+                        }catch(JavaLayerException ex){ System.out.println("Player error"); };                     
                     try {
                         Thread.sleep(1);
                     } catch (InterruptedException ex){ System.out.println("Thread Sleep Error"); }
-                    System.out.println("Cas threadu: "+stopWatch.getElapsedTime());
-                    stopWatch.stop();
                 }
             }
         };
         try{
             threadPlayer.sleep(1300);
         }catch(InterruptedException ex){ System.out.println("Thread Sleep Error"); }
-        threadPlayer.start();
-                */
-                
+        threadPlayer.start();                
 }
 
     public void stop() {
