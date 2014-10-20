@@ -98,37 +98,37 @@ public class Controller {
                     
                     
                     k = view.getKeys();
+                    //System.out.println(counter+" ctralala");
                     for(int i=0;i<k.length;i++){
+                        
                         if(k[i] == true){
                             boolean m = false;
                             for(Dot dot: playingDots){
-                                if(dot.getPosition()>=480 && dot.getPosition()<=520 && dot.getPushed()==0 && dot.getColour().ordinal()==i){
+                                if(dot.getPosition()>=430 && dot.getPosition()<=490 && dot.getPushed()==0 && dot.getColour().ordinal()==i){
                                     dot.push();
                                     m=true; 
                                     System.out.println("Zmacknut spravny knoflik");
                                     break;
                                 }
-                                else if(dot.getPosition()>=480 && dot.getPosition()<=520 && dot.getPushed()>0 && dot.getColour().ordinal()==i){
+                                else if(dot.getPosition()>=430 && dot.getPosition()<=490 && dot.getPushed()>0 && dot.getColour().ordinal()==i){
                                     m=false;
                                     System.out.println("Zmacknuto podruhe");
                                 }
                             }
-                            if(!m) System.out.println("Chyba");
-                            
+                            k[i] = false;
+                            if(!m) System.out.println("Chyba");  
                         }    
-                        if(k[i] == false){
+                        else{
                             for(Dot dot: playingDots){
-                                if(dot.getPosition()>520 && dot.getPushed()==0 && dot.getColour().ordinal()==i){
+                                if(dot.getPosition()>490 && dot.getPushed()==0 && dot.getColour().ordinal()==i){
                                     dot.mistake();
                                     System.out.println("Nestihl jsi to");
                                 }
                             }
                         }
                     }
-                    
-                    try{
-                        Thread.sleep(4);
-                    } catch (InterruptedException ex){ System.out.println("Thread Sleep Error"); }
+                    while(stopWatch.getElapsedTime() < 3){}
+                    stopWatch.stop();
                 }
             }
         };
@@ -150,7 +150,7 @@ public class Controller {
         try{
             threadPlayer.sleep(1300);
         }catch(InterruptedException ex){ System.out.println("Thread Sleep Error"); }
-        threadPlayer.start();                
+        //threadPlayer.start();                
 }
 
     public void stop() {
