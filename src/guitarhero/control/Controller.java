@@ -34,6 +34,7 @@ public class Controller {
     private Player p;
     private boolean[] k;
     private int mistake;
+    private final int waiting = 4;
     
     public void initializeGame(){
         //nacteni tecek v Song
@@ -72,18 +73,18 @@ public class Controller {
             @Override
             public void run() {
                 while (running) {
-                    //stopWatch.start();
+                    
                     //System.out.println("counter "+counter);
-                        for(int i = index;i<index+6;i++){
-                            //System.out.println("Som zaseknuty kokot");
-                            if(counter == allDots.get(i).getTime()){
-                                playingDots.add(allDots.get(i));
-                                index++;
-                                //System.out.println("Pridavam tecku");
-                            }
-                        }       
-                    for(int i=0;i<playingDots.size();i++){
-                   // for(Dot d: playingDots){  
+                    for(int i = index;i<index+6;i++){
+                        //System.out.println("Som zaseknuty kokot");
+                       // if(counter == allDots.get(i).getTime()){
+                        if( Math.abs( stopWatch.getElapsedTime() - allDots.get(i).getTime() ) < waiting){
+                            playingDots.add(allDots.get(i));
+                            index++;
+                            //System.out.println("Pridavam tecku");
+                        }
+                    }       
+                    for(int i=0;i<playingDots.size();i++){ 
                         playingDots.get(i).move();
                         //System.out.println("Mam tecku");
                         if(playingDots.get(i).getPosition() >= 534){
@@ -97,7 +98,7 @@ public class Controller {
                     
                     System.out.println("counter " + counter);
                     System.out.println("stopky  " + stopWatch.getElapsedTime());
-                    
+                    /*
                     k = view.getKeys();
                     for(int i=0;i<k.length;i++){ 
                         if(k[i] == true){
@@ -126,11 +127,12 @@ public class Controller {
                             }
                         }
                     }
-                    System.out.println("haha");
+                    */
+                    System.out.println(stopWatch.getElapsedTime());
                     //while(stopWatch.getElapsedTime() < 10){}
                     //stopWatch.stop();
                     try {
-                        Thread.sleep(4);
+                        Thread.sleep(waiting);
                     } catch (InterruptedException ex){ System.out.println("Thread Sleep Error"); }
                 }
             }
