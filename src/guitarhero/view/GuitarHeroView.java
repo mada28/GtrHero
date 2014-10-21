@@ -35,6 +35,18 @@ public class GuitarHeroView extends javax.swing.JFrame {
         controller.setView(this);
         this.requestFocus(); 
     }
+    public void resetScore(){
+        scoreLabel.setText(""+0);
+    }
+    public void setScore(int score){
+        scoreLabel.setText(""+score);
+    }
+    public void setName(String name){
+        nameLabel.setText(name);
+    }
+    public void resetName(){
+        nameLabel.setText("PLAYER");
+    }
     
     public boolean[] getKeys(){
         return keys;
@@ -49,6 +61,8 @@ public class GuitarHeroView extends javax.swing.JFrame {
     private void initComponents() {
 
         mainPanel1 = new guitarhero.view.MainPanel();
+        nameLabel = new javax.swing.JLabel();
+        scoreLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -65,15 +79,33 @@ public class GuitarHeroView extends javax.swing.JFrame {
 
         mainPanel1.setMinimumSize(new java.awt.Dimension(600, 508));
 
+        nameLabel.setFont(new java.awt.Font("DotumChe", 0, 24)); // NOI18N
+        nameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nameLabel.setText("PLAYER");
+
+        scoreLabel.setFont(new java.awt.Font("DotumChe", 0, 24)); // NOI18N
+        scoreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        scoreLabel.setText("0");
+
         javax.swing.GroupLayout mainPanel1Layout = new javax.swing.GroupLayout(mainPanel1);
         mainPanel1.setLayout(mainPanel1Layout);
         mainPanel1Layout.setHorizontalGroup(
             mainPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 600, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanel1Layout.createSequentialGroup()
+                .addContainerGap(400, Short.MAX_VALUE)
+                .addGroup(mainPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29))
         );
         mainPanel1Layout.setVerticalGroup(
             mainPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 508, Short.MAX_VALUE)
+            .addGroup(mainPanel1Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(nameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(scoreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(311, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -164,5 +196,7 @@ public class GuitarHeroView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private guitarhero.view.MainPanel mainPanel1;
+    private javax.swing.JLabel nameLabel;
+    private javax.swing.JLabel scoreLabel;
     // End of variables declaration//GEN-END:variables
 }
