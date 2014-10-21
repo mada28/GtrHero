@@ -44,7 +44,7 @@ public class Dot{
         return this.position;
     }
     public void move(){
-        this.position++;
+        this.position+=2;
     }
     public int getPushed(){
         return this.pushed;
