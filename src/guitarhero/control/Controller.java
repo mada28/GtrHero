@@ -26,22 +26,26 @@ public class Controller {
     private List<Dot> playingDots;
     private List<Dot> allDots;
     private StopWatch stopWatch;
-    private long counter = 0;
     static int index=0;
     private Thread threadDots;
     private Thread threadPlayer;
     private boolean running = false;
     private Player p;
     private boolean[] k;
-    private int mistake;
+    public int mistake;
+    public int score;
+    public int multi;
+    public int hits;
     private final int waiting = 4;
     
     public void initializeGame(){
-        //nacteni tecek v Song
         song = new Song();
         allDots = song.getDots();
         k = new boolean[6];
         mistake = 0;
+        score = 0;
+        multi = 10;
+        hits = 0;
         System.out.println("new song");
     }
     
@@ -73,14 +77,16 @@ public class Controller {
             @Override
             public void run() {
                 while (running) {
-                    
                     //System.out.println("counter "+counter);
                     for(int i = index;i<index+6;i++){
                         //System.out.println("Som zaseknuty kokot");
                        // if(counter == allDots.get(i).getTime()){
                         if( Math.abs( stopWatch.getElapsedTime() - allDots.get(i).getTime() ) < waiting){
-                            playingDots.add(allDots.get(i));
-                            index++;
+                            if(!playingDots.contains(allDots.get(i))){
+                                playingDots.add(allDots.get(i));
+                                view.updateModel(playingDots);
+                                index++;
+                            }
                             //System.out.println("Pridavam tecku");
                         }
                     }       
@@ -92,13 +98,9 @@ public class Controller {
                             //System.out.println("Odebiram tecku");
                         }  
                     }
-                    counter += 10;
-                    view.updateModel(playingDots);
-                    view.repaint();
                     
-                    System.out.println("counter " + counter);
-                    System.out.println("stopky  " + stopWatch.getElapsedTime());
-                    /*
+                    view.repaint();                    
+                    
                     k = view.getKeys();
                     for(int i=0;i<k.length;i++){ 
                         if(k[i] == true){
@@ -106,29 +108,45 @@ public class Controller {
                             for(Dot dot: playingDots){
                                 if(dot.getPosition()>=430 && dot.getPosition()<=490 && dot.getPushed()==0 && dot.getColour().ordinal()==i){
                                     dot.push();
-                                    m=true; 
+                                    m=true;
+                                    score += multi;
+                                    hits++;
+                                    if(hits % 10 == 0 && multi < 100){
+                                        multi *= 2;
+                                    }
                                     System.out.println("Zmacknut spravny knoflik");
                                     break;
                                 }
+                                /*
                                 else if(dot.getPosition()>=430 && dot.getPosition()<=490 && dot.getPushed()>0 && dot.getColour().ordinal()==i){
                                     m=false;
                                     System.out.println("Zmacknuto podruhe");
                                 }
+                                */
                             }
                             k[i] = false;
-                            if(!m) System.out.println("Chyba");  
+                            if(!m){
+                                hits = 0;
+                                if(multi > 10)
+                                    multi /= 2;
+                                System.out.println("Chyba");
+                            }
                         }    
                         else{
                             for(Dot dot: playingDots){
                                 if(dot.getPosition()>490 && dot.getPushed()==0 && dot.getColour().ordinal()==i){
                                     dot.mistake();
+                                    mistake++;
+                                    hits = 0;
+                                    if(multi > 10)
+                                        multi /= 2;
                                     System.out.println("Nestihl jsi to");
                                 }
                             }
                         }
                     }
-                    */
-                    System.out.println(stopWatch.getElapsedTime());
+                    view.setScore(score);
+                    System.out.println("stopky1  " + stopWatch.getElapsedTime());
                     //while(stopWatch.getElapsedTime() < 10){}
                     //stopWatch.stop();
                     try {
@@ -145,7 +163,8 @@ public class Controller {
                 while (running) {
                     try{
                         p.play(1);
-                        }catch(JavaLayerException ex){ System.out.println("Player error"); }                    
+                        }catch(JavaLayerException ex){ System.out.println("Player error"); }      
+                    System.out.println("stopky2  " + stopWatch.getElapsedTime());
                     try {
                         Thread.sleep(1);
                     } catch (InterruptedException ex){ System.out.println("Thread Sleep Error"); }
@@ -155,7 +174,7 @@ public class Controller {
         try{
             threadPlayer.sleep(1300);
         }catch(InterruptedException ex){ System.out.println("Thread Sleep Error"); }
-        threadPlayer.start();                
+        threadPlayer.start();               
 }
 
     public void stop() {
