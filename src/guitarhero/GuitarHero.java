@@ -24,6 +24,5 @@ public class GuitarHero {
         System.out.println("Po new GuitarHeroView");
         view.setVisible(true);
         System.out.println("Po setVisible");
-        controller.start();
     }
 }

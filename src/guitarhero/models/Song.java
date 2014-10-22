@@ -59,7 +59,7 @@ public class Song {
         int d = 0;
             Sequence sequence;
         try {
-            sequence = MidiSystem.getSequence(new File("test1.mid"));
+            sequence = MidiSystem.getSequence(new File("testik2.mid"));
         
         for (Track track :  sequence.getTracks()) {
             if(track.size() < 10){
@@ -80,7 +80,7 @@ public class Song {
                         int octave = (key / 12)-1;
                         int note = key % 12;
                         
-                        long tick = (event.getTick()/10)*10;
+                        long tick = event.getTick();
                        
                         if(key < 45)        this.dots.add(new Dot(Colours.RED,tick,0)); 
                         else if(key < 50)   this.dots.add(new Dot(Colours.YELLOW,tick,0));
